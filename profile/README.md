@@ -5,7 +5,9 @@
 
 LumonBot is a **Cable-Driven Parallel Robot (CDPR)** designed to automate the manual crate-loading bottleneck found in garment manufacturing pipelines. Instead of a bulky six-axis robotic arm, LumonBot uses a lightweight frame of 8 tensioned cables to control a 3-DOF actuator — enabling a lower-cost, scalable, and reconfigurable alternative for constrained factory floor spaces.
 
-![Introduction image]("../img/intro.jpg")
+![Project Screenshot](../img/intro.png)
+
+
 
 ---
 
