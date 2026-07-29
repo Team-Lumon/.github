@@ -5,6 +5,8 @@
 
 LumonBot is a **Cable-Driven Parallel Robot (CDPR)** designed to automate the manual crate-loading bottleneck found in garment manufacturing pipelines. Instead of a bulky six-axis robotic arm, LumonBot uses a lightweight frame of 8 tensioned cables to control a 3-DOF actuator — enabling a lower-cost, scalable, and reconfigurable alternative for constrained factory floor spaces.
 
+![Introduction image]("../img/intro.jpg")
+
 ---
 
 ## 🛠️ System Architecture
@@ -38,14 +40,16 @@ The main controller performs inverse kinematics on incoming target coordinates, 
 
 ## 🔌 PCB Subsystems
 
-| PCB | Qty | Layers | Core Components | Function |
-|---|---|---|---|---|
-| **Main Controller** | 1 | 4-layer | ESP32 + STM32H7 | Parses UI commands, computes inverse kinematics, generates synchronized CAN commands for all 8 motor nodes, bridges Wi-Fi ↔ CAN |
-| **Motor Controller** | 8 | 2-layer | STM32G0 + TMC2209 | One per cable-drive actuator; converts CAN length-deltas into step/direction signals; reports ACK & target-reached status |
+| PCB | Qty | Layers | Core Components | Function | Firmware |
+|---|---|---|---|---|---|
+| **Main Controller** | 1 | 4-layer | ESP32 + STM32H7 | Parses UI commands, computes inverse kinematics, generates synchronized CAN commands for all 8 motor nodes, bridges Wi-Fi ↔ CAN | [Main Controller Firmware](https://github.com/Team-Lumon/Lumon_Bot_MainController_Firmware) |
+| **Motor Controller** | 8 | 2-layer | STM32G0 + TMC2209 | One per cable-drive actuator; converts CAN length-deltas into step/direction signals; reports ACK & target-reached status | [Motor Controller Firmware](https://github.com/Team-Lumon/Lumon_Bot_MotorDriver_Firmware) |
 | **Power Distribution** | 2 | 2-layer | 24V→5V Buck Converter | Distributes main 24V rail, regulates 5V logic supply, wide copper pours for high-current paths |
-| **Actuator Board** | 1 | 2-layer | ESP32 + TMC2209 | Drives the NEMA17 gripper motor; receives open/close commands wirelessly via Wi-Fi |
+| **Actuator Board** | 1 | 2-layer | ESP32 + TMC2209 | Drives the NEMA17 gripper motor; receives open/close commands wirelessly via Wi-Fi | [Actuator Firmware](https://github.com/Team-Lumon/actuator-controller) |
 
 **Stack-up rationale:** The main controller uses a 4-layer board (dedicated GND/PWR planes) to support the mixed digital, wireless, and CAN circuitry of the ESP32 + STM32H7 pairing with minimal EMI. The three peripheral boards use standard 2-layer, 1.6mm FR-4 stack-ups to keep manufacturing cost low across 8 identical motor-node units.
+
+[PCB design repository](https://github.com/Team-Lumon/Lumon_Bot_PCB)
 
 ---
 
